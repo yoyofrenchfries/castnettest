@@ -1,0 +1,93 @@
+	footer{
+		margin-top: 5em;
+	}
+
+
+    	/*all page end*/
+    	/*nav*/
+    	/*文章專用row*/
+    	.ct_row{
+    		margin-right: -45px;
+    		margin-left: -45px;
+    		justify-content: center;
+    		display: flex;
+    		flex-wrap: wrap;
+    	}
+    	.col{
+    		padding: 0;
+    	}
+    	/*下方小文字*/
+    	.smalltitle{
+    		font-size: 14px;
+    		font-weight: lighter;
+    	}
+    	.title{
+    		display: inline;
+    		margin-top: 10em;
+    		margin-bottom: 2em;
+    		font-size: 16px;
+    	}
+    	.ct_div_t{
+			margin-bottom: 150px;
+    	}
+		.ct_div{
+			
+			/*margin-right: 1em;*/
+		}
+		.ct_div > div{
+			/*強制同一行*/
+			display: inline;
+			/*padding-right: 0;*/
+		}
+		/*看看效果如何，這是網路上說置中的方式*/
+		/*.ct_div img{
+			display: block;
+			margin: auto;
+		}*/
+		.boldtitle{
+			font-weight: bold;
+		}
+		.greenbar{
+			border-left-style: solid;
+		    border-left-width: 2px;
+		    border-left-color: #3AAB97;
+		    padding: 0 0.75em;
+		}
+		.ct_div > img{
+			margin-bottom: 1em;
+		 }
+		@media (min-width:100px) {
+		.ct_div > img{
+			width: 8em;
+		 }
+		}
+		@media (min-width:500px) {
+		.ct_div > img{
+			width: 12em;
+		 }
+		}
+		@media (min-width:768px) {
+		.ct_div > img{
+			width: 14em;
+		 }
+		}
+
+		/*底下*/
+		.ct_div_b > div{
+		}
+		.greenlongbar{
+			/*position: absolute;*/
+			/*top: 50%;*/
+			margin-top: 10px;
+			width: 20em;
+			height: 4px;
+			background-color: #3AAB97;
+			margin-top: 2.6em;
+
+		}
+		.readmore{
+			/*死都不換行*/
+			white-space:nowrap;
+			letter-spacing: 10px;
+			margin-top: 2em;
+		}
