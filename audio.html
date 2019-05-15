@@ -432,5 +432,197 @@
 	        </div>
 	        <div>
     </footer>
+
+    <script type="text/javascript">
+		window.onload = updateTime;
+		var progressbar = document.querySelector('#progressbar');
+		
+		var player = document.getElementById('player');
+		var play = document.getElementById('play');
+		var volume = document.getElementById('volume');
+		console.log(play);
+		// isGo要設在外面才能切換!
+		var isGo = false;
+		var isOn = false;
+		play.onclick = function(){
+			//每案一次就切換
+			isGo = !isGo;
+			var player = document.getElementById('player');
+			var play = document.getElementById('play');
+			// var play = document.getElementById('play');
+			
+			if(isGo) {
+				console.log(1);
+				
+				play.innerHTML='<i class="fas fa-pause"></i>';
+				player.play();
+				
+			}else{
+				console.log(2);
+				play.innerHTML = '<i class="fas fa-play"></i>';
+				player.pause();
+				
+			}
+			
+		};
+
+		volume.onclick = function(){
+			//每案一次就切換
+			isOn = !isOn;
+			// var play = document.getElementById('play');
+			
+			if(isOn) {
+				console.log(1);
+				
+				volume.innerHTML='<i class="fas fa-volume-mute"></i>';
+				player.volume = 0;
+				
+			}else{
+				console.log(2);
+				volume.innerHTML = '<i class="fas fa-volume-up"></i>';
+				player.volume = 1;
+				
+			}
+			
+		};
+		
+		
+		player.addEventListener('timeupdate', handleProgress);
+		console.log(player.currentTime); //現在時間
+		console.log(player.duration); //總長多久
+		player1 = document.getElementById('player1');
+		var progress = document.getElementById('progress');
+		var progressbar = document.getElementById('progressbar');
+		var littlecircle = document.getElementsByClassName('littlecircle');
+		function handleProgress() {
+		  const percent = (player.currentTime / player.duration) * 100;
+		  const wwidth = progressbar.style.width;
+		  progressbar.style.width =`${percent}%`;
+		  // littlecircle.style.marginLeft= `${percent}% + ${wwidth}`;
+
+		}
+		function scrub(e) {
+		  const scrubTime = (e.offsetX / progress.offsetWidth) * player.duration;
+		  player.currentTime = scrubTime;
+		}
+		// console.log(player.duration)
+		let mousedown = false;
+		player.addEventListener('timeupdate', handleProgress);
+		progress.addEventListener('click', scrub);
+		//如果事情是真的，就執行功能
+		progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
+		progress.addEventListener('mousedown', () => mousedown = true);
+		progress.addEventListener('mouseup', () => mousedown = false);
+
+		// var time = document.getElementsByClassName('time');
+		// long = player.duration;
+		// console.log(long);
+		// time.innerHTML = '<p>`${long}`</p>';
+// 		(function (logger) {
+//     console.old = console.log;
+//     console.log = function () {
+//         var output = "", arg, i;
+
+//         for (i = 0; i < arguments.length; i++) {
+//             arg = arguments[i];
+//             output += "<span class=\"log-" + (typeof arg) + "\">";
+
+//             if (
+//                 typeof arg === "number" &&
+//                 typeof JSON === "number" &&
+//                 typeof JSON.stringify === "function"
+//             ) {
+//                 output += JSON.stringify(arg);   
+//             } else {
+//                 output += arg;   
+//             }
+
+//             output += "</span>&nbsp;";
+//         }
+
+//         logger.innerHTML += output + "<br>";
+//         console.old.apply(undefined, arguments);
+//     };
+// })(document.getElementsByClassName('time'));
+
+// Testing
+console.log("Hi!", {a:3, b:6}, 42, true);
+	var audio = document.getElementsByTagName("audio")[0];
+	console.log(audio);
+	function updateTime(){
+		
+		
+		const min = Math.floor(this.currentTime / 60);
+		const dmin = Math.floor(this.duration / 60);
+		const dsec = Math.floor(this.duration % 60);
+		const ddsec = Math.floor(this.duration);
+		let durationTime = "";
+		function calcDuration(){
+			
+			if (dmin == 0){
+				if (ddsec < 10){
+				 durationTime = '00:0' + ddsec;
+				}
+				else{
+					durationTime = '00:' + ddsec;
+				}
+			}
+			else{
+				if (dsec < 10){
+				durationTime = '0' + dmin + ":0" + dsec;
+				}
+				else{
+					durationTime = '0' + dmin + ":" + dsec;
+				}
+			}
+			return durationTime;
+		}
+		console.log(durationTime);
+
+		if (min == 0){
+			if (Math.floor(this.currentTime) < 10){
+			document.getElementById('tracktime').innerHTML = '00:0' + Math.floor(this.currentTime) + ' / ' + calcDuration();
+			}
+			else{
+				document.getElementById('tracktime').innerHTML = '00:' + Math.floor(this.currentTime) + ' / ' + calcDuration();
+			}
+		}else{
+
+			if (Math.floor(this.currentTime % 60) < 10){
+			document.getElementById('tracktime').innerHTML = '0' + min + ":0" + Math.floor(this.currentTime % 60) + ' / ' + calcDuration();
+			}
+			else{
+				document.getElementById('tracktime').innerHTML = '0' + min + ":" + Math.floor(this.currentTime % 60) + ' / ' + calcDuration();
+			}
+		}
+		
+		// document.getElementById('tracktime').innerHTML = '00:00' + ' / ' + calcDuration();
+
+		
+
+		
+		 console.log(this.currentTime);
+	}
+
+
+
+	// document.getElementById('tracktime').innerHTML = '00:00' + ' / ' + calcDuration();
+	var onairimg = document.getElementById('onair');
+	onairimg.addEventListener('onload', updateTime);
+	audio.addEventListener('onload', updateTime);
+	audio.addEventListener('timeupdate', updateTime);
+// 	var downloadLink = document.getElementById('download');
+// 	downloadLink.onclick = function() {
+//     // var audio = document.getElementsByTagName("audio")[0];
+//     // cxt = canvas.getContext('2d'),
+//     // var downloadLink = document.getElementById('download');
+	
+// 	console.log('hi!');
+// 	downloadLink.href = 'https://castnet.nctu.edu.tw/files/article/875/multimedia/%E8%95%83%E8%96%AF%E5%B8%82%E9%9B%86%EF%BC%BF%E5%96%80%E5%A0%B1%E5%BB%A3%E6%92%AD_%E7%BC%A9%E6%B7%B7.mp3';
+//     downloadLink.download = "song.mp3";
+//     // var dataURL = audio.toDataURL();
+// 	// console.log(dataURL);
+// };
+	</script>
 </body>
 </html>
